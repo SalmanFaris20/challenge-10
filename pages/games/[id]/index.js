@@ -4,6 +4,9 @@ import GamesImg from "../../../images/games.jpg";
 import { useRouter } from "next/router";
 import Rock from "../../../components/Rock";
 import Random from "../../../components/Random";
+import Leaderboard from "../../../components/Leaderboard";
+import Navbar from "../../../components/Navbar";
+import Leaderboard2 from "../../../components/Leaderboard2";
 
 export default function UserSingle() {
   const router = useRouter();
@@ -13,20 +16,17 @@ export default function UserSingle() {
     <div>
       {id == 1 ? (
         <div>
-          <div>
-            <Image src={GamesImg} layout="fill" objectFit="cover" />
-          </div>
-          <div className="absolute inset-y-28 inset-x-10">
+          <Navbar />
+          <div className="mt-52 flex flex-col">
             <Rock />
+            <Leaderboard />
           </div>
         </div>
       ) : (
         <div>
-          <div>
-            {/* <Image src={GamesImg} layout="fill" objectFit="cover" /> */}
-          </div>
-          <div className="absolute left-1/2">
+          <div className="flex flex-col px-10">
             <Random />
+            <Leaderboard2 />
           </div>
         </div>
       )}

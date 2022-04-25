@@ -77,9 +77,9 @@ export default function Rock() {
   }, [computer, choise]);
 
   return (
-    <div className="flex flex-col justify-center gap-5 ">
+    <div className="flex flex-col justify-center gap-5 h-screen">
       <div className="flex justify-between px-0 py-5 items-center ">
-        <div className="absolute top-10 left-10 flex flex-col w-28 h-28 justify-center border border-solid border-r-2 border-blue-500 bg-white">
+        <div className="absolute top-1/3 left-10 flex flex-col w-28 h-28 justify-center border border-solid border-r-2 border-blue-500 bg-white">
           <h5>You Pick</h5>
           {choise === "paper" && (
             <div className="bg-white border-solid border-2 w-9 h-9 border-blue-600 rounded-full flex justify-center items-center">
@@ -97,7 +97,7 @@ export default function Rock() {
             </div>
           )}
         </div>
-        <div className="absolute top-10 right-10 flex flex-col w-28 h-28 justify-center  border border-solid border-r-2 border-blue-500 bg-white">
+        <div className="absolute top-1/3 right-10 flex flex-col w-28 h-28 justify-center  border border-solid border-r-2 border-blue-500 bg-white">
           <h5>Computer Pick</h5>
           <div>
             {computer === "paper" && (
@@ -127,7 +127,7 @@ export default function Rock() {
         </div>
       )}
 
-      <div className="absolute top-1 left-1/2 right-1/2 flex flex-col justify-center items-center">
+      <div className="absolute top-1/3 left-1/2 right-1/2 flex flex-col justify-center items-center">
         <h1 className="text-white text-3xl">{result}</h1>
         <div className="flex gap-2 justify-center items-center mt-5">
           <div className="bg-white p-10 h-40 flex flex-col justify-center items-center text-3xl rounded-3xl">
@@ -140,7 +140,7 @@ export default function Rock() {
           </div>
         </div>
       </div>
-      <div className="absolute left-5 bottom-0 text-white border-2 border-solid border-white px-4 py-8 rounded-md">
+      <div className="absolute left-5 bottom-3 text-white border-2 border-solid border-white px-4 py-8 rounded-md">
         {active ? (
           <div className="flex gap-8">
             <div
@@ -192,7 +192,7 @@ export default function Rock() {
       <label
         htmlFor="my-modal-6"
         onClick={handleOpen}
-        className="btn modal-button absolute right-5 bottom-0 text-white border-solid border-2 border-white rounded-md"
+        className="btn modal-button absolute right-5 bottom-3 text-white border-solid border-2 border-white rounded-md"
       >
         Rules Games
       </label>
