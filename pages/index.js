@@ -4,13 +4,13 @@ import background from "../images/homepage.jpg";
 
 export default function Home() {
   return (
-    <div>
+    <>
       <div>
         <Image src={background} layout="fill" objectFit="cover" />
       </div>
       <div className="absolute inset-y-0 w-full">
         <Navbar />
       </div>
-    </div>
+    </>
   );
 }

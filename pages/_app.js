@@ -1,7 +1,43 @@
 import '../styles/globals.css'
+import { Provider, useDispatch } from "react-redux";
+import store from "../app/store";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth, db } from "../config/firebase";
+import { doc, getDoc } from "firebase/firestore";
+import { updateAuthenticatedUser } from "../redux/auth/authSlice";
+import { useEffect } from "react";
+
+const App = (props) => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const docRef = doc(db, "users", user.uid);
+        const docSnap = await getDoc(docRef);
+        dispatch(
+          updateAuthenticatedUser({
+            email: user.email,
+            username: docSnap.data().username,
+            gender: docSnap.data().gender,
+          })
+        );
+      }
+    });
+  }, []);
+
+  return props.children;
+};
+
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return (
+    <Provider store={store}>
+      <App>
+        <Component {...pageProps} />
+      </App>
+    </Provider>
+  );
 }
 
 export default MyApp
