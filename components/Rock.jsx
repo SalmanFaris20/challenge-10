@@ -198,7 +198,11 @@ export default function Rock() {
       </label>
       {open && (
         <>
-          <input type="checkbox" id="my-modal-6" class="modal-toggle"></input>
+          <input
+            type="checkbox"
+            id="my-modal-6"
+            className="modal-toggle"
+          ></input>
           <div className="modal modal-bottom sm:modal-middle">
             <div className="modal-box">
               <h3 className="font-bold text-lg">RULES THE GAMES!</h3>
