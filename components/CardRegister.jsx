@@ -49,7 +49,7 @@ export default function CardRegister() {
               className="input input-bordered w-full max-w-xs"
             />
           </div>
-          <div class="form-control w-full max-w-xs">
+          <div className="form-control w-full max-w-xs">
             <label className="label">
               <span className="label-text">Gender</span>
             </label>

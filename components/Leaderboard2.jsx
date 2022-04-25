@@ -18,8 +18,8 @@ export default function Leaderboard2() {
   }, [userCollectionRef]);
   return (
     <div>
-      <div class="overflow-x-auto w-full">
-        <table class="table w-full">
+      <div className="overflow-x-auto w-full">
+        <table className="table w-full">
           <thead>
             <tr>
               <th>No</th>
@@ -32,12 +32,12 @@ export default function Leaderboard2() {
           <tbody>
             {players.map((item, index) => {
               return (
-                <tr>
+                <tr key={index}>
                   <th>{index + 1}</th>
                   <td>
-                    <div class="flex items-center space-x-3">
-                      <div class="avatar">
-                        <div class="mask mask-squircle w-12 h-12">
+                    <div className="flex items-center space-x-3">
+                      <div className="avatar">
+                        <div className="mask mask-squircle w-12 h-12">
                           {item.gender === "Men" && (
                             <Image
                               src={men}
@@ -57,21 +57,21 @@ export default function Leaderboard2() {
                         </div>
                       </div>
                       <div>
-                        <div class="font-bold">{item.username}</div>
-                        <div class="text-sm opacity-50">{item.gender}</div>
+                        <div className="font-bold">{item.username}</div>
+                        <div className="text-sm opacity-50">{item.gender}</div>
                       </div>
                     </div>
                   </td>
                   <td>
                     {item.email}
                     <br />
-                    <span class="badge badge-ghost badge-sm">
+                    <span className="badge badge-ghost badge-sm">
                       Desktop Support Technician
                     </span>
                   </td>
 
                   <th>
-                    <button class="btn btn-ghost btn-xs">
+                    <button className="btn btn-ghost btn-xs">
                       {item.score.game2}
                     </button>
                   </th>

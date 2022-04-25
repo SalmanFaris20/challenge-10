@@ -210,7 +210,7 @@ export default function Rock() {
                 score di leaderboard dan mulai game kembali
               </p>
               <div className="modal-action">
-                <label for="my-modal-6" class="btn">
+                <label htmlFor="my-modal-6" className="btn">
                   Yay!
                 </label>
               </div>
