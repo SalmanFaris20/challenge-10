@@ -1,26 +1,25 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import men from "../images/male.png";
 import women from "../images/female.png";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchLeaderboard } from "../redux/games/gamesSlice";
 import { ClimbingBoxLoader } from "react-spinners";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
+import { db } from "../config/firebase";
 
 export default function Leaderboard() {
-  const dispatch = useDispatch();
-  const games = useSelector((state) => state.games);
-  const loadPosts = async () => {
-    try {
-      const response = await dispatch(fetchLeaderboard()).unwrap();
-      console.log("ini response", response);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  const [players, setPlayers] = useState([]);
 
+  const userCollectionRef = collection(db, "users");
+  const q = query(userCollectionRef, orderBy("score.game1", "desc"));
   useEffect(() => {
-    loadPosts();
-  }, []);
+    const getDataPlayer = async () => {
+      const data = await getDocs(q);
+      setPlayers(data.docs.map((doc) => ({ ...doc.data() })));
+    };
+    getDataPlayer();
+  }, [userCollectionRef]);
   return (
     <div>
       <div className="overflow-x-auto w-full px-10 py-10">
@@ -30,16 +29,12 @@ export default function Leaderboard() {
               <th>No</th>
               <th>Name</th>
               <th>Email</th>
+              <th>Played</th>
               <th>Score</th>
             </tr>
           </thead>
           <tbody>
-            {games.isLeadeLoading && (
-              <div className="absolute top-1/2 right-1/2">
-                <ClimbingBoxLoader color={"#FFFFFF"} size={15} />
-              </div>
-            )}
-            {games.dataLead.map((item, index) => {
+            {players.map((item, index) => {
               return (
                 <tr key={index}>
                   <th>{index + 1}</th>
@@ -71,6 +66,7 @@ export default function Leaderboard() {
                       </div>
                     </div>
                   </td>
+
                   <td>
                     {item.email}
                     <br />
@@ -78,7 +74,10 @@ export default function Leaderboard() {
                       Desktop Support Technician
                     </span>
                   </td>
-
+                  <td>
+                    {item.gameplayed.game1 == true && <h5>was played</h5>}
+                    {item.gameplayed.game1 == false && <h5>not played</h5>}
+                  </td>
                   <th>
                     <button className="btn btn-ghost btn-xs">
                       {item.score.game1}

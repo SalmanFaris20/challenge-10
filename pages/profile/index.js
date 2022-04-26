@@ -72,7 +72,7 @@ export default function Profile() {
       ) : (
         <div className="flex gap-10 justify-center items-center h-screen font-utama">
           {authenticatedUser && (
-            <div>
+            <div className="flex gap-20">
               <div>
                 <div className="avatar">
                   <div className="w-40 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2 ">

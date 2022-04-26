@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginAuth, updateCredentials } from "../redux/auth/authSlice";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Link from "next/link";
 
 export default function Cardlogin() {
   const dispatch = useDispatch();
@@ -61,6 +62,14 @@ export default function Cardlogin() {
               placeholder="Type here"
               className="input input-bordered w-full max-w-xs"
             />
+          </div>
+          <div className="flex justify-end">
+            <h5 className="text-white font-light">
+              not have an account?{" "}
+              <Link href={"/register"} passHref>
+                <a className="text-second font-bold">Sign Up</a>
+              </Link>
+            </h5>
           </div>
           <div className="card-actions justify-center">
             {auth.isLoginLoading ? (

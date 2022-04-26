@@ -32,9 +32,11 @@ export default function Navbar() {
             Games
           </a>
         </Link>
-        <a className="hover:border-b-indigo-500 hover:border-2 hover:border-transparent">
-          List Player
-        </a>
+        <Link href={"/listplayers"} passHref>
+          <a className="hover:border-b-indigo-500 hover:border-2 hover:border-transparent">
+            List Players
+          </a>
+        </Link>
       </div>
       {authenticatedUser ? (
         <div className="flex-none gap-1 text-white">

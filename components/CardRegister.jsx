@@ -4,6 +4,7 @@ import AuthMiddleware from "../middlewares/authMiddleware";
 import { registerAuth, updateCredentials } from "../redux/auth/authSlice";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Link from "next/link";
 
 export default function CardRegister() {
   const dispatch = useDispatch();
@@ -105,6 +106,14 @@ export default function CardRegister() {
               placeholder="Type here"
               className="input input-bordered w-full max-w-xs"
             />
+          </div>
+          <div className="flex justify-end">
+            <h5 className="text-white font-light">
+              Already have an account? Please{" "}
+              <Link href={"/login"}>
+                <a className="text-second font-bold">Sign In</a>
+              </Link>
+            </h5>
           </div>
           <div className="card-actions justify-center">
             {auth.isRegisterLoading ? (

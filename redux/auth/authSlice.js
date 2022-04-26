@@ -20,7 +20,6 @@ export const fetchDataPlayer = createAsyncThunk(
   async () => {
     try {
       const userCollectionRef = collection(db, "users");
-      console.log("ini details", userCollectionRef);
       const datas = await getDocs(userCollectionRef);
       const result = datas.docs.map((doc) => ({ ...doc.data() }));
       return result;

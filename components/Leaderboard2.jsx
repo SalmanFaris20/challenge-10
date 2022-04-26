@@ -1,10 +1,14 @@
-import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { db } from "../config/firebase";
 import men from "../images/male.png";
 import women from "../images/female.png";
 import Image from "next/image";
-export default function Leaderboard2() {
+import { useDispatch, useSelector } from "react-redux";
+import { fetchLeaderboard2 } from "../redux/games/gamesSlice";
+import { ClimbingBoxLoader } from "react-spinners";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
+import { db } from "../config/firebase";
+
+export default function Leaderboard() {
   const [players, setPlayers] = useState([]);
 
   const userCollectionRef = collection(db, "users");
@@ -16,16 +20,16 @@ export default function Leaderboard2() {
     };
     getDataPlayer();
   }, [userCollectionRef]);
+
   return (
     <div>
-      <div className="overflow-x-auto w-full">
+      <div className="overflow-x-auto w-full px-10 py-10">
         <table className="table w-full">
           <thead>
             <tr>
               <th>No</th>
               <th>Name</th>
               <th>Email</th>
-
               <th>Score</th>
             </tr>
           </thead>

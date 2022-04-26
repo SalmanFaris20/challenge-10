@@ -18,7 +18,6 @@ export default function Rock() {
   const [refresh, setRefresh] = useState(false);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
 
   const setMyChoise = (value) => {
     setChoise(value);
@@ -38,7 +37,7 @@ export default function Rock() {
   const handleRefresh = async () => {
     dispatch(
       updateScore({
-        score: score,
+        score,
       })
     );
     setChoise("");

@@ -4,8 +4,6 @@ import {
   doc,
   getDoc,
   getDocs,
-  orderBy,
-  query,
   updateDoc,
 } from "firebase/firestore";
 import { auth, db } from "../../config/firebase";
@@ -24,6 +22,7 @@ export const fetchData = createAsyncThunk("games/fetchData", async () => {
 export const updateScore = createAsyncThunk(
   "games/updateScore",
   async (credentials) => {
+    console.log("ini credent", credentials);
     const { score } = credentials;
     try {
       const userDoc = doc(db, "users", auth.currentUser.uid);
@@ -38,28 +37,13 @@ export const updateScore = createAsyncThunk(
   }
 );
 
-export const fetchLeaderboard = createAsyncThunk(
-  "games/fetchLeaderboard",
-  async () => {
-    try {
-      const userCollectionRef = collection(db, "users");
-      const q = query(userCollectionRef, orderBy("score.game1", "desc"));
-      const data = await getDocs(q);
-      const result = data.docs.map((doc) => ({ ...doc.data() }));
-      return result;
-    } catch (error) {
-      throw TypeError("Can't push score");
-    }
-  }
-);
-
 export const gamesSlice = createSlice({
   name: "games",
   initialState: {
     isListGamesLoading: false,
-    isLeadeLoading: false,
+
     data: [],
-    dataLead: [],
+
     score: 0,
   },
   extraReducers: (builder) => {
@@ -77,21 +61,12 @@ export const gamesSlice = createSlice({
       state.isListGamesLoading = true;
     });
     builder.addCase(updateScore.fulfilled, (state, action) => {
+      const score = action.payload;
+      state.score = score;
       state.isListGamesLoading = false;
-      state.score = action.payload;
     });
     builder.addCase(updateScore.rejected, (state) => {
       state.isListGamesLoading = false;
-    });
-    builder.addCase(fetchLeaderboard.pending, (state) => {
-      state.isLeadeLoading = true;
-    });
-    builder.addCase(fetchLeaderboard.fulfilled, (state, action) => {
-      state.isLeadeLoading = false;
-      state.dataLead = action.payload;
-    });
-    builder.addCase(fetchLeaderboard.rejected, (state) => {
-      state.isLeadeLoading = false;
     });
   },
 });
