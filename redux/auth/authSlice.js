@@ -5,8 +5,30 @@ import {
   signOut,
   updateEmail,
 } from "firebase/auth";
-import { doc, setDoc, Timestamp, updateDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDocs,
+  setDoc,
+  Timestamp,
+  updateDoc,
+} from "firebase/firestore";
 import { auth, db } from "../../config/firebase";
+
+export const fetchDataPlayer = createAsyncThunk(
+  "auth/fetchDataPlayer",
+  async () => {
+    try {
+      const userCollectionRef = collection(db, "users");
+      console.log("ini details", userCollectionRef);
+      const datas = await getDocs(userCollectionRef);
+      const result = datas.docs.map((doc) => ({ ...doc.data() }));
+      return result;
+    } catch (error) {
+      throw TypeError("Can't load data");
+    }
+  }
+);
 
 export const editAuth = createAsyncThunk(
   "auth/editAuth",
@@ -21,7 +43,7 @@ export const editAuth = createAsyncThunk(
         username,
         gender,
       });
-      updateEmail(user, email);
+      // updateEmail(user, email);
     } catch (error) {
       throw TypeError("Unable Edit Form");
     }
@@ -99,6 +121,7 @@ export const authSlice = createSlice({
       confirmpassword: "",
       gender: "",
     },
+    data: [],
     isLoginLoading: false,
     authenticatedUser: {},
     isLogoutLoading: false,
@@ -161,6 +184,16 @@ export const authSlice = createSlice({
     });
     builder.addCase(editAuth.rejected, (state) => {
       state.isEditLoading = false;
+    });
+    builder.addCase(fetchDataPlayer.pending, (state) => {
+      state.isFetchDataPlayerLoading = true;
+    });
+    builder.addCase(fetchDataPlayer.fulfilled, (state, action) => {
+      state.data = action.payload;
+      state.isFetchDataPlayerLoading = false;
+    });
+    builder.addCase(fetchDataPlayer.rejected, (state) => {
+      state.isFetchDataPlayerLoading = false;
     });
   },
 });

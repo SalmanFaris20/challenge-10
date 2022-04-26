@@ -2,14 +2,29 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AuthMiddleware from "../middlewares/authMiddleware";
 import { registerAuth, updateCredentials } from "../redux/auth/authSlice";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function CardRegister() {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
-
+  const autth = auth.isRegisterLoading;
+  console.log(autth);
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await dispatch(registerAuth(auth.form));
+    await dispatch(registerAuth(auth.form)).then((response) => {
+      if (response.error) {
+        toast.error("error", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+    });
   };
 
   const onInputChange = (event) => {
@@ -20,8 +35,10 @@ export default function CardRegister() {
       })
     );
   };
+
   return (
     <AuthMiddleware>
+      <ToastContainer />
       <div className="card w-96 glass">
         <form className="card-body" onSubmit={handleSubmit}>
           <h2 className="card-title">Register</h2>
@@ -58,10 +75,10 @@ export default function CardRegister() {
               name="gender"
               onChange={onInputChange}
             >
-              <option disabled selected>
+              <option disabled selected defaultValue={"Men"}>
                 Pick one
               </option>
-              <option value={"Man"}>Man</option>
+              <option value={"Men"}>Men</option>
               <option value={"Women"}>Women</option>
             </select>
           </div>
@@ -90,9 +107,13 @@ export default function CardRegister() {
             />
           </div>
           <div className="card-actions justify-center">
-            <button className="btn btn-primary" type="submit">
-              Register
-            </button>
+            {auth.isRegisterLoading ? (
+              <button className="btn loading">Register</button>
+            ) : (
+              <button className="btn btn-primary" type="submit">
+                Register
+              </button>
+            )}
           </div>
         </form>
       </div>

@@ -4,10 +4,11 @@ import kertas from "../images/icon-paper.svg";
 import batu from "../images/icon-rock.svg";
 import gunting from "../images/icon-scissors.svg";
 import Image from "next/image";
-import { db, auth } from "../config/firebase";
-import { getDoc, updateDoc, doc } from "firebase/firestore";
+import { useDispatch } from "react-redux";
+import {  updateScore } from "../redux/games/gamesSlice";
 
 export default function Rock() {
+  const dispatch = useDispatch();
   const [computer, setComputer] = useState("");
   const [score, setScore] = useState(0);
   const [choise, setChoise] = useState("");
@@ -35,12 +36,11 @@ export default function Rock() {
   };
 
   const handleRefresh = async () => {
-    const userDoc = doc(db, "users", auth.currentUser.uid);
-    const docSnap = await getDoc(userDoc);
-    const currentScore = docSnap.data().score.game1;
-    const newScore = currentScore + score;
-    await updateDoc(userDoc, { "score.game1": newScore });
-    await updateDoc(userDoc, { "gameplayed.game1": true });
+    dispatch(
+      updateScore({
+        score: score,
+      })
+    );
     setChoise("");
     setScore(0);
     setRound(0);
@@ -121,7 +121,7 @@ export default function Rock() {
       {refresh && (
         <div
           onClick={() => handleRefresh()}
-          className="absolute top-1/2 right-1/2"
+          className="absolute top-1/4 right-1/2"
         >
           <Image src={refreshimg} alt="refresh" />
         </div>

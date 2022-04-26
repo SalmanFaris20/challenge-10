@@ -1,38 +1,46 @@
-import { collection, getDocs } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
-import { db } from "../config/firebase";
 import Link from "next/link";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchData } from "../redux/games/gamesSlice";
 
 export default function CardGames() {
-  const [games, setGames] = useState([]);
-  const userCollectionRef = collection(db, "games");
-  useEffect(() => {
-    const getDataGames = async () => {
-      const data = await getDocs(userCollectionRef);
-      setGames(data.docs.map((doc) => ({ ...doc.data() })));
-    };
+  const games = useSelector((state) => state.games);
+  const dispatch = useDispatch();
 
-    getDataGames();
+  const loadPosts = async () => {
+    try {
+      const response = await dispatch(fetchData()).unwrap();
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    loadPosts();
   }, []);
   return (
-    <div className="flex flex-row gap-2">
-      {games.map((item) => {
+    <div className="flex flex-row justify-center items-center mt-20 gap-10">
+      {games.data.map((item) => {
         return (
-          <div className="card w-96 bg-base-100 shadow-xl" key={item.idgame}>
-            <figure>
-              <img src={item.img_url} alt="games" />
+          <div className="card w-72 bg-base-100 shadow-xl" key={item.idgame}>
+            <figure className="px-10 pt-10">
+              <img src={item.img_url} alt="games" className="rounded-xl" />
             </figure>
-            <div className="card-body">
-              <h2 className="card-title">
-                {item.name}
-                <div className="badge badge-secondary">NEW</div>
-              </h2>
-              <p>{item.description}</p>
-              <Link href={`/games/${item.idgame}`}>
-                <div className="card-actions justify-end cursor-pointer">
-                  <a className="badge badge-outline">Play</a>
-                </div>
-              </Link>
+            <div className="card-body items-center text-center">
+              <div className="flex justify-between w-full">
+                <h5 className="card-title text-base">{item.name}</h5>
+                <button className="card-title text-base bg-second rounded-md p-1">
+                  #1
+                </button>
+              </div>
+              <div className="flex justify-center mt-5 w-full">
+                <Link href={`/games/${item.idgame}`}>
+                  <div className="card-actions">
+                    <button className="btn btn-primary">Play</button>
+                  </div>
+                </Link>
+              </div>
             </div>
           </div>
         );

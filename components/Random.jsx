@@ -3,6 +3,7 @@ import refreshimg from "../images/refresh.svg";
 import Image from "next/image";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { auth, db } from "../config/firebase";
+import Navbar from "./Navbar";
 
 export default function Random() {
   const [result, setResult] = useState(0);
@@ -34,20 +35,23 @@ export default function Random() {
     }
   };
   return (
-    <div className="flex flex-col justify-center items-center h-screen space-y-10">
-      {refresh && (
-        <div onClick={() => handleRefresh()}>
-          <Image src={refreshimg} alt="refresh" />
-        </div>
-      )}
-      <div className="text-3xl text-white">{result}</div>
-      {active ? (
-        <button onClick={randomClick} className="btn btn-primary">
-          Play
-        </button>
-      ) : (
-        <button className="btn btn-primary cursor-not-allowed">Play</button>
-      )}
-    </div>
+    <>
+      <Navbar />
+      <div className="flex flex-col justify-center items-center h-screen space-y-10">
+        {refresh && (
+          <div onClick={() => handleRefresh()}>
+            <Image src={refreshimg} alt="refresh" />
+          </div>
+        )}
+        <div className="text-3xl text-white">{result}</div>
+        {active ? (
+          <button onClick={randomClick} className="btn btn-primary">
+            Play
+          </button>
+        ) : (
+          <button className="btn btn-primary cursor-not-allowed">Play</button>
+        )}
+      </div>
+    </>
   );
 }

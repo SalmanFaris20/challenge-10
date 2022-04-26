@@ -1,6 +1,7 @@
-import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginAuth, updateCredentials } from "../redux/auth/authSlice";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Cardlogin() {
   const dispatch = useDispatch();
@@ -16,11 +17,24 @@ export default function Cardlogin() {
 
   const onSubmit = async (event) => {
     event.preventDefault();
-    await dispatch(loginAuth(auth.form));
+    await dispatch(loginAuth(auth.form)).then((response) => {
+      if (response.error) {
+        toast.error("error", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+    });
   };
 
   return (
     <div>
+      <ToastContainer />
       <div className="card w-96 glass">
         <form className="card-body" onSubmit={onSubmit}>
           <h2 className="card-title">Login</h2>
@@ -49,9 +63,15 @@ export default function Cardlogin() {
             />
           </div>
           <div className="card-actions justify-center">
-            <button className="btn btn-primary" type="submit">
-              Sign In
-            </button>
+            {auth.isLoginLoading ? (
+              <button className="btn loading" type="submit">
+                Sign In
+              </button>
+            ) : (
+              <button className="btn btn-primary" type="submit">
+                Sign In
+              </button>
+            )}
           </div>
         </form>
       </div>

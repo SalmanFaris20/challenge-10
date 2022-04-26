@@ -8,6 +8,10 @@ module.exports = {
       fontFamily: {
         utama: ["Poppins"],
       },
+      colors: {
+        utama: "#151521",
+        second: "#6a30fa",
+      },
     },
   },
   plugins: [require("daisyui")],

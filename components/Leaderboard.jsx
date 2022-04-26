@@ -1,36 +1,45 @@
-import { collection, getDocs, orderBy, query } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
-import { db } from "../config/firebase";
+import React, { useEffect } from "react";
 import men from "../images/male.png";
 import women from "../images/female.png";
 import Image from "next/image";
-export default function Leaderboard() {
-  const [players, setPlayers] = useState([]);
+import { useDispatch, useSelector } from "react-redux";
+import { fetchLeaderboard } from "../redux/games/gamesSlice";
+import { ClimbingBoxLoader } from "react-spinners";
 
-  const userCollectionRef = collection(db, "users");
-  const q = query(userCollectionRef, orderBy("score.game1", "desc"));
+export default function Leaderboard() {
+  const dispatch = useDispatch();
+  const games = useSelector((state) => state.games);
+  const loadPosts = async () => {
+    try {
+      const response = await dispatch(fetchLeaderboard()).unwrap();
+      console.log("ini response", response);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
-    const getDataPlayer = async () => {
-      const data = await getDocs(q);
-      setPlayers(data.docs.map((doc) => ({ ...doc.data() })));
-    };
-    getDataPlayer();
-  }, [userCollectionRef]);
+    loadPosts();
+  }, []);
   return (
     <div>
-      <div className="overflow-x-auto w-full">
+      <div className="overflow-x-auto w-full px-10 py-10">
         <table className="table w-full">
           <thead>
             <tr>
               <th>No</th>
               <th>Name</th>
               <th>Email</th>
-
               <th>Score</th>
             </tr>
           </thead>
           <tbody>
-            {players.map((item, index) => {
+            {games.isLeadeLoading && (
+              <div className="absolute top-1/2 right-1/2">
+                <ClimbingBoxLoader color={"#FFFFFF"} size={15} />
+              </div>
+            )}
+            {games.dataLead.map((item, index) => {
               return (
                 <tr key={index}>
                   <th>{index + 1}</th>

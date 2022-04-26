@@ -7,6 +7,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { updateAuthenticatedUser } from "../redux/auth/authSlice";
 import { useEffect } from "react";
 
+
 const App = (props) => {
   const dispatch = useDispatch();
 

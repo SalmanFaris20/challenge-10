@@ -1,19 +1,18 @@
 import React from "react";
-import Image from "next/image";
-import GamesImg from "../../../images/games.jpg";
 import { useRouter } from "next/router";
 import Rock from "../../../components/Rock";
 import Random from "../../../components/Random";
 import Leaderboard from "../../../components/Leaderboard";
 import Navbar from "../../../components/Navbar";
 import Leaderboard2 from "../../../components/Leaderboard2";
+import LogoutMiddleware from "../../../middlewares/LogoutMiddleware";
 
 export default function UserSingle() {
   const router = useRouter();
   const { id } = router.query;
   console.log(id);
   return (
-    <div>
+    <LogoutMiddleware>
       {id == 1 ? (
         <div>
           <Navbar />
@@ -30,6 +29,6 @@ export default function UserSingle() {
           </div>
         </div>
       )}
-    </div>
+    </LogoutMiddleware>
   );
 }
