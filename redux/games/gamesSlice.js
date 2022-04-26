@@ -22,7 +22,6 @@ export const fetchData = createAsyncThunk("games/fetchData", async () => {
 export const updateScore = createAsyncThunk(
   "games/updateScore",
   async (credentials) => {
-    console.log("ini credent", credentials);
     const { score } = credentials;
     try {
       const userDoc = doc(db, "users", auth.currentUser.uid);
@@ -37,13 +36,31 @@ export const updateScore = createAsyncThunk(
   }
 );
 
+export const updateScoreGame2 = createAsyncThunk(
+  "games/updateScoreGame2",
+  async (credentials) => {
+    console.log("ini credent", credentials);
+    const { result } = credentials;
+    try {
+      const userDoc = doc(db, "users", auth.currentUser.uid);
+      const docSnap = await getDoc(userDoc);
+      const currentScore = docSnap.data().score.game2;
+      const newScore = currentScore + result;
+      await updateDoc(userDoc, { "score.game2": newScore });
+      await updateDoc(userDoc, { "gameplayed.game2": true });
+    } catch (error) {
+      throw TypeError("Can't push score");
+    }
+  }
+);
+
 export const gamesSlice = createSlice({
   name: "games",
   initialState: {
     isListGamesLoading: false,
 
     data: [],
-
+    result: 0,
     score: 0,
   },
   extraReducers: (builder) => {
@@ -62,10 +79,21 @@ export const gamesSlice = createSlice({
     });
     builder.addCase(updateScore.fulfilled, (state, action) => {
       const score = action.payload;
-      state.score = score;
+      state.score += score;
+      console.log(state.score);
       state.isListGamesLoading = false;
     });
     builder.addCase(updateScore.rejected, (state) => {
+      state.isListGamesLoading = false;
+    });
+    builder.addCase(updateScoreGame2.pending, (state) => {
+      state.isListGamesLoading = true;
+    });
+    builder.addCase(updateScoreGame2.fulfilled, (state, action) => {
+      state.result = action.payload;
+      state.isListGamesLoading = false;
+    });
+    builder.addCase(updateScoreGame2.rejected, (state) => {
       state.isListGamesLoading = false;
     });
   },

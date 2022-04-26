@@ -1,23 +1,24 @@
 import React, { useState } from "react";
 import refreshimg from "../images/refresh.svg";
 import Image from "next/image";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
-import { auth, db } from "../config/firebase";
 import Navbar from "./Navbar";
+import { useDispatch } from "react-redux";
+import { updateScoreGame2 } from "../redux/games/gamesSlice";
 
 export default function Random() {
   const [result, setResult] = useState(0);
   const [refresh, setRefresh] = useState(false);
   const [round, setRound] = useState(0);
   const [active, setActive] = useState(true);
+  const dispatch = useDispatch();
 
   const handleRefresh = async () => {
-    const userDoc = doc(db, "users", auth.currentUser.uid);
-    const docSnap = await getDoc(userDoc);
-    const currentScore = docSnap.data().score.game2;
-    const newScore = currentScore + result;
-    await updateDoc(userDoc, { "score.game2": newScore });
-    await updateDoc(userDoc, { "gameplayed.game2": true });
+    dispatch(
+      updateScoreGame2({
+        result: result,
+      })
+    );
+    console.log(result);
     setResult(0);
     setRefresh(false);
     setActive(true);
