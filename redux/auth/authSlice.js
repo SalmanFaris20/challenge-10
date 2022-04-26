@@ -29,6 +29,8 @@ export const fetchDataPlayer = createAsyncThunk(
   }
 );
 
+
+
 export const editAuth = createAsyncThunk(
   "auth/editAuth",
   async (credentials) => {
@@ -126,6 +128,7 @@ export const authSlice = createSlice({
     isLogoutLoading: false,
     isRegisterLoading: false,
     isEditLoading: false,
+    authenticatedUser: null,
   },
   reducers: {
     updateCredentials: (state, action) => {

@@ -32,7 +32,11 @@ export default function CardPlayers() {
                   <Image src={men} alt="games" className="rounded-xl bg-emas" />
                 )}
                 {item.gender === "Women" && (
-                  <Image src={men} alt="games" className="rounded-xl" />
+                  <Image
+                    src={women}
+                    alt="games"
+                    className="rounded-xl bg-emas"
+                  />
                 )}
               </figure>
               <div className="card-body items-center text-center">

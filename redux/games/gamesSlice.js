@@ -19,6 +19,8 @@ export const fetchData = createAsyncThunk("games/fetchData", async () => {
   }
 });
 
+
+
 export const updateScore = createAsyncThunk(
   "games/updateScore",
   async (credentials) => {

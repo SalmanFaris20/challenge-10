@@ -1,10 +1,11 @@
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../redux/auth/authSlice";
+import { fetchDetailPlayer, logout } from "../redux/auth/authSlice";
 import men from "../images/male.png";
 import women from "../images/female.png";
 import Image from "next/image";
+import { PuzzleIcon } from "@heroicons/react/solid";
 
 export default function Navbar() {
   const dispatch = useDispatch();
@@ -21,7 +22,8 @@ export default function Navbar() {
     <div className="navbar bg-transparent font-utama px-5">
       <div className="flex-1">
         <Link href={"/"} passHref>
-          <a className="btn btn-link normal-case text-white text-xl">
+          <a className="btn btn-link normal-case text-white text-xl hover:no-underline hover:text-second">
+            <PuzzleIcon className="h-5 w-5 text-white mr-2" />
             Squid Game
           </a>
         </Link>
@@ -88,10 +90,14 @@ export default function Navbar() {
       ) : (
         <div className="space-x-5">
           <Link href={"/login"} passHref>
-            <a>Login</a>
+            <a className="hover:border-b-indigo-500 hover:border-2 hover:border-transparent">
+              Login
+            </a>
           </Link>
           <Link href={"/register"} passHref>
-            <a>Register</a>
+            <a className="hover:border-b-indigo-500 hover:border-2 hover:border-transparent">
+              Register
+            </a>
           </Link>
         </div>
       )}

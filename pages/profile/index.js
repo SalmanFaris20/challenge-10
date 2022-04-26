@@ -7,12 +7,14 @@ import Navbar from "../../components/Navbar";
 import {
   editAuth,
   fetchDataPlayer,
+  updateAuthenticatedUser,
   updateCredentials,
 } from "../../redux/auth/authSlice";
 import { XIcon } from "@heroicons/react/solid";
 import { ClockLoader } from "react-spinners";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from "next/router";
 
 export default function Profile() {
   const dispatch = useDispatch();
@@ -28,30 +30,9 @@ export default function Profile() {
     event.preventDefault();
     await dispatch(editAuth(updateauth.form)).then(() => {
       setOpen(false);
+      window.location.reload(false);
     });
   };
-
-  const loadPosts = async () => {
-    try {
-      const response = await dispatch(fetchDataPlayer()).unwrap();
-      console.log(response);
-    } catch (err) {
-      toast.error("error", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-      console.log(err);
-    }
-  };
-
-  useEffect(() => {
-    loadPosts();
-  }, []);
 
   const handleChange = (event) => {
     dispatch(
@@ -115,46 +96,52 @@ export default function Profile() {
                     <h3 className="font-bold text-lg">Edit Profile</h3>
                     <XIcon className="h-5 w-5" onClick={handleClose} />
                   </div>
-                  <div className="form-control w-full max-w-xs">
-                    <label className="label">
-                      <span className="label-text">Username</span>
-                    </label>
-                    <input
-                      type="text"
-                      name="username"
-                      placeholder="Type here"
-                      className="input input-bordered w-full max-w-xs"
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div className="form-control w-full max-w-xs">
-                    <label className="label">
-                      <span className="label-text">Email</span>
-                    </label>
-                    <input
-                      type="text"
-                      name="email"
-                      placeholder="Type here"
-                      className="input input-bordered w-full max-w-xs"
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div className="form-control w-full max-w-xs">
-                    <label className="label">
-                      <span className="label-text">Gender</span>
-                    </label>
-                    <select
-                      className="select select-bordered"
-                      name="gender"
-                      onChange={handleChange}
-                    >
-                      <option disabled selected defaultValue={"Men"}>
-                        Pick one
-                      </option>
-                      <option value={"Men"}>Men</option>
-                      <option value={"Women"}>Women</option>
-                    </select>
-                  </div>
+                  {authenticatedUser && (
+                    <>
+                      <div className="form-control w-full max-w-xs">
+                        <label className="label">
+                          <span className="label-text">Username</span>
+                        </label>
+                        <input
+                          type="text"
+                          name="username"
+                          defaultValue={authenticatedUser.username}
+                          placeholder="Type here"
+                          className="input input-bordered w-full max-w-xs"
+                          onChange={handleChange}
+                        />
+                      </div>
+                      <div className="form-control w-full max-w-xs">
+                        <label className="label">
+                          <span className="label-text">Email</span>
+                        </label>
+                        <input
+                          type="text"
+                          name="email"
+                          defaultValue={authenticatedUser.email}
+                          placeholder="Type here"
+                          className="input input-bordered w-full max-w-xs"
+                          onChange={handleChange}
+                        />
+                      </div>
+                      <div className="form-control w-full max-w-xs">
+                        <label className="label">
+                          <span className="label-text">Gender</span>
+                        </label>
+                        <select
+                          className="select select-bordered"
+                          name="gender"
+                          onChange={handleChange}
+                          defaultValue={authenticatedUser.gender}
+                        >
+                          <option disabled>Pick one</option>
+                          <option value={"Men"}>Men</option>
+                          <option value={"Women"}>Women</option>
+                        </select>
+                      </div>
+                    </>
+                  )}
+
                   <div className="modal-action">
                     {updateauth.isEditLoading ? (
                       <button
