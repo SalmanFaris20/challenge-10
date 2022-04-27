@@ -19,7 +19,7 @@ export default function Navbar() {
   };
 
   return (
-    <div className="navbar bg-transparent font-utama px-5">
+    <div className="navbar bg-transparent font-utama px-5 border-b-slate-50 border-2 border-transparent">
       <div className="flex-1">
         <Link href={"/"} passHref>
           <a className="btn btn-link normal-case text-white text-xl hover:no-underline hover:text-second">

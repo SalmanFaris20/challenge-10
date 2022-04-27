@@ -14,7 +14,7 @@ export default function UserSingle() {
   return (
     <LogoutMiddleware>
       {id == 1 ? (
-        <div>
+        <div className="bg-utama">
           <Navbar />
           <div className="mt-52 flex flex-col">
             <Rock />

@@ -66,13 +66,7 @@ export default function Leaderboard() {
                       </div>
                     </div>
                   </td>
-                  <td>
-                    {item.email}
-                    <br />
-                    <span className="badge badge-ghost badge-sm">
-                      Desktop Support Technician
-                    </span>
-                  </td>
+                  <td>{item.email}</td>
 
                   <th>
                     <button className="btn btn-ghost btn-xs">

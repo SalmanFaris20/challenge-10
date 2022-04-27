@@ -67,13 +67,7 @@ export default function Leaderboard() {
                     </div>
                   </td>
 
-                  <td>
-                    {item.email}
-                    <br />
-                    <span className="badge badge-ghost badge-sm">
-                      Desktop Support Technician
-                    </span>
-                  </td>
+                  <td>{item.email}</td>
                   <td>
                     {item.gameplayed.game1 == true && <h5>was played</h5>}
                     {item.gameplayed.game1 == false && <h5>not played</h5>}

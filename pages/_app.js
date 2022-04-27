@@ -6,10 +6,15 @@ import { auth, db } from "../config/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { updateAuthenticatedUser } from "../redux/auth/authSlice";
 import { useEffect } from "react";
-
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const App = (props) => {
   const dispatch = useDispatch();
+  useEffect(() => {
+    AOS.init();
+    AOS.refresh();
+  }, []);
 
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
