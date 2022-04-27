@@ -9,8 +9,7 @@ import Link from "next/link";
 export default function CardRegister() {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
-  const autth = auth.isRegisterLoading;
-  console.log(autth);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     await dispatch(registerAuth(auth.form)).then((response) => {

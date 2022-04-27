@@ -43,7 +43,7 @@ export default function Profile() {
     );
   };
   return (
-    <div className="h-screen">
+    <div className="h-screen bg-utama">
       <Navbar />
       <ToastContainer />
       {updateauth.isFetchDataPlayerLoading ? (

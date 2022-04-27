@@ -18,7 +18,6 @@ export default function Random() {
         result: result,
       })
     );
-    console.log(result);
     setResult(0);
     setRefresh(false);
     setActive(true);
@@ -38,7 +37,7 @@ export default function Random() {
   return (
     <>
       <Navbar />
-      <div className="flex flex-col justify-center items-center h-screen space-y-10">
+      <div className="flex flex-col  justify-center items-center h-screen space-y-10">
         {refresh && (
           <div onClick={() => handleRefresh()}>
             <Image src={refreshimg} alt="refresh" />

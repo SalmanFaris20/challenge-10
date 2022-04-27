@@ -10,10 +10,7 @@ export default function CardGames() {
   const loadPosts = async () => {
     try {
       const response = await dispatch(fetchData()).unwrap();
-      console.log(response);
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   };
 
   useEffect(() => {

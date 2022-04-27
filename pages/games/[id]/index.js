@@ -10,7 +10,6 @@ import LogoutMiddleware from "../../../middlewares/LogoutMiddleware";
 export default function UserSingle() {
   const router = useRouter();
   const { id } = router.query;
-  console.log(id);
   return (
     <LogoutMiddleware>
       {id == 1 ? (
@@ -23,7 +22,7 @@ export default function UserSingle() {
         </div>
       ) : (
         <div>
-          <div className="flex flex-col px-10">
+          <div className="flex flex-col px-10 bg-utama">
             <Random />
             <Leaderboard2 />
           </div>

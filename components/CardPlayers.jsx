@@ -12,10 +12,7 @@ export default function CardPlayers() {
   const loadPosts = async () => {
     try {
       const response = await dispatch(fetchDataPlayer()).unwrap();
-      console.log(response);
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   };
 
   useEffect(() => {
