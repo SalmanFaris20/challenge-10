@@ -23,7 +23,7 @@ export const fetchDataPlayer = createAsyncThunk(
       const result = datas.docs.map((doc) => ({ ...doc.data() }));
       return result;
     } catch (error) {
-      throw TypeError("Can't load data");
+      throw TypeError("Cant load data");
     }
   }
 );
