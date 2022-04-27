@@ -15,11 +15,9 @@ export const fetchData = createAsyncThunk("games/fetchData", async () => {
     const result = datas.docs.map((doc) => ({ ...doc.data() }));
     return result;
   } catch (error) {
-    throw TypeError("Can't load data");
+    throw TypeError("Cant load data");
   }
 });
-
-
 
 export const updateScore = createAsyncThunk(
   "games/updateScore",
@@ -33,7 +31,7 @@ export const updateScore = createAsyncThunk(
       await updateDoc(userDoc, { "score.game1": newScore });
       await updateDoc(userDoc, { "gameplayed.game1": true });
     } catch (error) {
-      throw TypeError("Can't push score");
+      throw TypeError("Cant push score");
     }
   }
 );
@@ -50,7 +48,7 @@ export const updateScoreGame2 = createAsyncThunk(
       await updateDoc(userDoc, { "score.game2": newScore });
       await updateDoc(userDoc, { "gameplayed.game2": true });
     } catch (error) {
-      throw TypeError("Can't push score");
+      throw TypeError("Cant push score");
     }
   }
 );

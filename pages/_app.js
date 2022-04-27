@@ -1,4 +1,4 @@
-import '../styles/globals.css'
+import "../styles/globals.css";
 import { Provider, useDispatch } from "react-redux";
 import store from "../app/store";
 import { onAuthStateChanged } from "firebase/auth";
@@ -35,7 +35,6 @@ const App = (props) => {
   return props.children;
 };
 
-
 function MyApp({ Component, pageProps }) {
   return (
     <Provider store={store}>
@@ -46,4 +45,4 @@ function MyApp({ Component, pageProps }) {
   );
 }
 
-export default MyApp
+export default MyApp;

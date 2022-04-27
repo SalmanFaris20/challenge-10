@@ -19,10 +19,10 @@ export default function Home() {
             <div className="space-y-5  w-1/2" data-aos="fade-right">
               <h3 className="text-white text-6xl font-semibold">CloseMount</h3>
               <h5 className="font-light w-72 text-lg">
-                Let's play the games and get your point for no 1{" "}
+                Lets play the games and get your point for no 1{" "}
                 <span className="text-emas">leaderboard!</span>
               </h5>
-              <button className="btn bg-pink px-5 py-2">Let's Play!</button>
+              <button className="btn bg-pink px-5 py-2">Lets Play!</button>
               <div className="space-x-5">
                 <WhatsappShareButton
                   title="Play the game with me!"

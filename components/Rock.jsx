@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import refreshimg from "../images/refresh.svg";
 import kertas from "../images/icon-paper.svg";
 import batu from "../images/icon-rock.svg";
 import gunting from "../images/icon-scissors.svg";
 import Image from "next/image";
 import { useDispatch } from "react-redux";
-import {  updateScore } from "../redux/games/gamesSlice";
+import { updateScore } from "../redux/games/gamesSlice";
 
 export default function Rock() {
   const dispatch = useDispatch();
