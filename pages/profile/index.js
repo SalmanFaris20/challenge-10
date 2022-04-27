@@ -1,20 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import men from "../../images/male.png";
 import women from "../../images/female.png";
 import Image from "next/image";
 import Navbar from "../../components/Navbar";
-import {
-  editAuth,
-  fetchDataPlayer,
-  updateAuthenticatedUser,
-  updateCredentials,
-} from "../../redux/auth/authSlice";
+import { editAuth, updateCredentials } from "../../redux/auth/authSlice";
 import { XIcon } from "@heroicons/react/solid";
 import { ClockLoader } from "react-spinners";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useRouter } from "next/router";
 
 export default function Profile() {
   const dispatch = useDispatch();

@@ -41,7 +41,6 @@ export const updateScore = createAsyncThunk(
 export const updateScoreGame2 = createAsyncThunk(
   "games/updateScoreGame2",
   async (credentials) => {
-    console.log("ini credent", credentials);
     const { result } = credentials;
     try {
       const userDoc = doc(db, "users", auth.currentUser.uid);
@@ -82,7 +81,6 @@ export const gamesSlice = createSlice({
     builder.addCase(updateScore.fulfilled, (state, action) => {
       const score = action.payload;
       state.score += score;
-      console.log(state.score);
       state.isListGamesLoading = false;
     });
     builder.addCase(updateScore.rejected, (state) => {

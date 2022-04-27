@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { ClimbingBoxLoader, ClipLoader } from "react-spinners";
+import { ClimbingBoxLoader } from "react-spinners";
 import CardGames from "../../components/CardGames";
 import Navbar from "../../components/Navbar";
 

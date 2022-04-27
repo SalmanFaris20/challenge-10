@@ -1,9 +1,7 @@
 import Image from "next/image";
 import Navbar from "../components/Navbar";
-import GamesImage from "../images/gamespage.svg";
 import { TwitterShareButton, WhatsappShareButton } from "react-share";
 import { TwitterIcon, WhatsappIcon } from "react-share";
-import Tilt from "react-tilt";
 import pattern from "../images/pattern.svg";
 
 export default function Home() {

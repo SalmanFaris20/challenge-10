@@ -3,7 +3,6 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
-  updateEmail,
 } from "firebase/auth";
 import {
   collection,
@@ -29,8 +28,6 @@ export const fetchDataPlayer = createAsyncThunk(
   }
 );
 
-
-
 export const editAuth = createAsyncThunk(
   "auth/editAuth",
   async (credentials) => {
@@ -44,7 +41,6 @@ export const editAuth = createAsyncThunk(
         username,
         gender,
       });
-      // updateEmail(user, email);
     } catch (error) {
       throw TypeError("Unable Edit Form");
     }
