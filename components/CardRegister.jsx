@@ -74,10 +74,9 @@ export default function CardRegister() {
               className="select select-bordered"
               name="gender"
               onChange={onInputChange}
+              defaultValue={"Men"}
             >
-              <option disabled selected defaultValue={"Men"}>
-                Pick one
-              </option>
+              <option disabled>Pick one</option>
               <option value={"Men"}>Men</option>
               <option value={"Women"}>Women</option>
             </select>
