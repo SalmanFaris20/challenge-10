@@ -12,6 +12,7 @@ module.exports = {
         utama: "#151521",
         second: "#6a30fa",
         emas: "#d9a247",
+        pink: "#F91550",
       },
     },
   },
