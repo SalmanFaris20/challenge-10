@@ -29,7 +29,7 @@ export default function Leaderboard() {
             <tr>
               <th>No</th>
               <th>Name</th>
-              <th>Email</th>
+              <th className="hidden md:block">Email</th>
               <th>Score</th>
             </tr>
           </thead>
@@ -66,8 +66,11 @@ export default function Leaderboard() {
                       </div>
                     </div>
                   </td>
-                  <td>{item.email}</td>
-
+                  <td className="hidden md:block">{item.email}</td>
+                  <td className="hidden md:block italic">
+                    {item.gameplayed.game2 == true && <h5>was played</h5>}
+                    {item.gameplayed.game2 == false && <h5>not played</h5>}
+                  </td>
                   <th>
                     <button className="btn btn-ghost btn-xs">
                       {item.score.game2}

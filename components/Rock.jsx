@@ -77,7 +77,7 @@ export default function Rock() {
   return (
     <div className="flex flex-col justify-center gap-5 h-screen">
       <div className="flex justify-between px-0 py-5 items-center ">
-        <div className="flex flex-col items-center justify-center absolute top-1/3 left-10 space-y-2">
+        <div className="flex flex-col items-center justify-center absolute top-20 sm:top-1/3 left-20 sm:left-10 space-y-2">
           <h5>Your Pick</h5>
           <div className="flex flex-col w-28 h-28 justify-center items-center border-solid border-8 border-blue-500 bg-white rounded-full">
             {choise === "paper" && (
@@ -97,7 +97,7 @@ export default function Rock() {
             )}
           </div>
         </div>
-        <div className="flex flex-col items-center justify-center absolute top-1/3 right-10 space-y-2">
+        <div className="flex flex-col items-center justify-center absolute top-20 sm:top-1/3 right-20 sm:right-10 space-y-2">
           <h5>Computer Pick</h5>
           <div className="flex flex-col w-28 h-28 justify-center items-center border-solid border-8 border-red-500 bg-white rounded-full">
             {computer === "paper" && (
@@ -121,7 +121,7 @@ export default function Rock() {
       {refresh && (
         <div
           onClick={() => handleRefresh()}
-          className="absolute top-1/4 right-1/2 left-1/2 justify-center flex"
+          className="absolute top-64 sm:top-1/4 right-1/2 left-1/2 justify-center flex"
         >
           <div className="justify-center bg-slate-400 w-96 flex">
             <button className="btn btn-secondary">Play Again</button>
@@ -129,7 +129,7 @@ export default function Rock() {
         </div>
       )}
 
-      <div className="absolute top-1/3 left-1/2 right-1/2 flex flex-col justify-center items-center font-utama">
+      <div className="absolute top-80 sm:top-1/3 left-1/2 right-1/2 flex flex-col justify-center items-center font-utama">
         <div>
           <h1 className="text-white text-6xl font-bold w-96 flex  justify-center">
             {result}
@@ -146,9 +146,9 @@ export default function Rock() {
           </div>
         </div>
       </div>
-      <div className="absolute left-8 bottom-5 text-white border-2 border-solid border-white px-2 py-4 rounded-md">
+      <div className="absolute sm:left-8 bottom-20 sm:bottom-5 left-6 text-white border-2 border-solid border-white px-2 py-4 rounded-md">
         {active ? (
-          <div className="flex gap-8">
+          <div className="flex gap-0 sm:gap-8">
             <div
               onClick={() => setMyChoise("paper")}
               className="bg-white border-8 border-solid border-blue-500 w-28 rounded-full h-28 flex justify-center items-center"
@@ -171,7 +171,7 @@ export default function Rock() {
             </div>
           </div>
         ) : (
-          <div className="cursor-not-allowed flex gap-8">
+          <div className="cursor-not-allowed flex gap-0 sm:gap-8">
             <div
               data-id="paper"
               className="bg-white border-8 border-solid border-blue-500 w-28 rounded-full h-28 flex justify-center items-center"
@@ -198,7 +198,7 @@ export default function Rock() {
       <label
         htmlFor="my-modal-6"
         onClick={handleOpen}
-        className="btn modal-button absolute right-8 bottom-5 text-white border-solid border-2 border-white rounded-md"
+        className="btn modal-button absolute right-36 sm:right-8 bottom-0 sm:bottom-5 text-white border-solid border-2 border-white rounded-md"
       >
         Rules Games
       </label>

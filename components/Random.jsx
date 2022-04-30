@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import refreshimg from "../images/refresh.svg";
-import Image from "next/image";
 import Navbar from "./Navbar";
 import { useDispatch } from "react-redux";
 import { updateScoreGame2 } from "../redux/games/gamesSlice";
@@ -40,10 +38,12 @@ export default function Random() {
       <div className="flex flex-col  justify-center items-center h-screen space-y-10">
         {refresh && (
           <div onClick={() => handleRefresh()}>
-            <Image src={refreshimg} alt="refresh" />
+            <div className="justify-center w-96 flex">
+              <button className="btn btn-secondary">Play Again</button>
+            </div>
           </div>
         )}
-        <div className="text-3xl text-white">{result}</div>
+        <div className="text-6xl font-bold  text-white">{result}</div>
         {active ? (
           <button onClick={randomClick} className="btn btn-primary">
             Play

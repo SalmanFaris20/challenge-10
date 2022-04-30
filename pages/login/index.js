@@ -1,17 +1,17 @@
 import React from "react";
 import Image from "next/image";
-import ImgLogin from "../../images/login.png";
+import LoginImage from "../../images/login.svg";
 import Cardlogin from "../../components/Cardlogin";
 import AuthMiddleware from "../../middlewares/authMiddleware";
 
 export default function Login() {
   return (
     <AuthMiddleware>
-      <div className="grid grid-cols-2 bg-white h-screen">
-        <div className="h-9 w-full">
-          <Image src={ImgLogin} layout="fill" objectFit="cover" />
+      <div className="grid grid-cols-2 bg-white h-screen ">
+        <div className="w-full">
+          <Image src={LoginImage} layout="fill" objectFit="cover" />
         </div>
-        <div className="absolute inset-y-1/4 inset-x-28 ">
+        <div className="absolute bottom-52 left-4 sm:left-4 lg:left-10 xl:left-14 ">
           <Cardlogin />
         </div>
       </div>

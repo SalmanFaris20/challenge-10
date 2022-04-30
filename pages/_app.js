@@ -18,14 +18,15 @@ const App = (props) => {
 
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
+      console.log("ini user", user);
       if (user) {
         const docRef = doc(db, "users", user.uid);
         const docSnap = await getDoc(docRef);
         dispatch(
           updateAuthenticatedUser({
             email: user.email,
-            username: docSnap.data().username,
-            gender: docSnap.data().gender,
+            username: user.displayName || docSnap.data().username,
+            gender: "Men" || docSnap.data().gender,
           })
         );
       }

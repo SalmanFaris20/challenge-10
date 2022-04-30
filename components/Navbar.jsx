@@ -41,7 +41,7 @@ export default function Navbar() {
         </Link>
       </div>
       {authenticatedUser ? (
-        <div className="flex-none gap-1 text-white">
+        <div className="flex-none invisible sm:visible gap-1 text-white">
           <h5>{authenticatedUser.username}</h5>
           <div className="dropdown dropdown-end">
             <label
@@ -101,7 +101,7 @@ export default function Navbar() {
           </Link>
         </div>
       )}
-      <div>
+      <div className="absolute top-2 right-8">
         <label className="btn btn-circle swap swap-rotate sm:hidden">
           <input type="checkbox" />
           <svg

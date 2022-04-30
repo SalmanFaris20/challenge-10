@@ -37,7 +37,7 @@ export default function Profile() {
     );
   };
   return (
-    <div className="h-screen bg-utama">
+    <div className=" bg-utama">
       <Navbar />
       <ToastContainer />
       {updateauth.isFetchDataPlayerLoading ? (
@@ -47,7 +47,7 @@ export default function Profile() {
       ) : (
         <div className="flex gap-10 justify-center items-center h-screen font-utama">
           {authenticatedUser && (
-            <div className="flex gap-20">
+            <div className="flex flex-col gap-10 items-center sm:flex-row sm:gap-20">
               <div>
                 <div className="avatar">
                   <div className="w-40 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2 ">
@@ -60,8 +60,8 @@ export default function Profile() {
                   </div>
                 </div>
               </div>
-              <div className="space-y-8">
-                <div>
+              <div className="space-y-8 flex flex-col justify-center items-center sm:items-start">
+                <div className="text-center sm:text-left">
                   <div>Username : {authenticatedUser.username}</div>
                   <div>Email : {authenticatedUser.email}</div>
                   <div>Gender : {authenticatedUser.gender}</div>

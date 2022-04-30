@@ -17,7 +17,7 @@ export default function CardGames() {
     loadPosts();
   }, []);
   return (
-    <div className="flex flex-row flex-wrap space-x-0 space-y-10  sm:space-x-10 sm:space-y-0  justify-center items-center mt-20">
+    <div className="flex flex-row flex-wrap space-x-0 space-y-10 py-10 sm:py-10  sm:space-x-10 sm:space-y-0  justify-center items-center mt-20">
       {games.data.map((item) => {
         return (
           <div className="card w-72 bg-base-100 shadow-xl" key={item.idgame}>

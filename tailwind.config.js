@@ -13,6 +13,8 @@ module.exports = {
         second: "#6a30fa",
         emas: "#d9a247",
         pink: "#F91550",
+        login: "#dc2249",
+        ungu: "#412B43",
       },
     },
   },

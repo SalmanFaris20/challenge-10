@@ -2,9 +2,6 @@ import React, { useEffect, useState } from "react";
 import men from "../images/male.png";
 import women from "../images/female.png";
 import Image from "next/image";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchLeaderboard } from "../redux/games/gamesSlice";
-import { ClimbingBoxLoader } from "react-spinners";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { db } from "../config/firebase";
 
@@ -28,8 +25,8 @@ export default function Leaderboard() {
             <tr>
               <th>No</th>
               <th>Name</th>
-              <th>Email</th>
-              <th>Played</th>
+              <th className="hidden md:block">Email</th>
+
               <th>Score</th>
             </tr>
           </thead>
@@ -67,8 +64,8 @@ export default function Leaderboard() {
                     </div>
                   </td>
 
-                  <td>{item.email}</td>
-                  <td>
+                  <td className="hidden md:block">{item.email}</td>
+                  <td className="hidden md:block italic">
                     {item.gameplayed.game1 == true && <h5>was played</h5>}
                     {item.gameplayed.game1 == false && <h5>not played</h5>}
                   </td>

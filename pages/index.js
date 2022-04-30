@@ -15,7 +15,7 @@ export default function Home() {
           <Image src={pattern} layout="fill" objectFit="cover" />
         </div>
         <div>
-          <div className="absolute bottom-20 left-20 ">
+          <div className="absolute bottom-40 left-6 sm:bottom-20 sm:left-10">
             <div className="space-y-5  w-1/2" data-aos="fade-right">
               <h3 className="text-white text-6xl font-semibold">CloseMount</h3>
               <h5 className="font-light w-72 text-lg">

@@ -73,7 +73,8 @@ export const registerAuth = createAsyncThunk(
         }
       );
     } catch (error) {
-      throw TypeError("Unable Access");
+      const errorMessage = error.message;
+      throw TypeError(errorMessage);
     }
   }
 );
@@ -98,6 +99,18 @@ export const loginAuth = createAsyncThunk(
     }
   }
 );
+
+export const googleAuth = createAsyncThunk("auth/googleAuth", async () => {
+  try {
+    await signInWithPopup(auth, provider).then((result) => {
+      const user = result.user;
+      console.log(user);
+    });
+  } catch (error) {
+    const errorMessage = error.message;
+    console.log(errorMessage);
+  }
+});
 
 export const logout = createAsyncThunk("auth/logout", async () => {
   try {
@@ -125,6 +138,7 @@ export const authSlice = createSlice({
     isRegisterLoading: false,
     isEditLoading: false,
     authenticatedUser: null,
+    isGoogleLoading: false,
   },
   reducers: {
     updateCredentials: (state, action) => {
@@ -192,6 +206,15 @@ export const authSlice = createSlice({
     });
     builder.addCase(fetchDataPlayer.rejected, (state) => {
       state.isFetchDataPlayerLoading = false;
+    });
+    builder.addCase(googleAuth.pending, (state) => {
+      state.isGoogleLoading = true;
+    });
+    builder.addCase(googleAuth.fulfilled, (state, action) => {
+      state.isGoogleLoading = false;
+    });
+    builder.addCase(googleAuth.rejected, (state) => {
+      state.isGoogleLoading = false;
     });
   },
 });
