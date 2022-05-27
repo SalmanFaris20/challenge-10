@@ -1,16 +1,21 @@
-import { useSelector } from "react-redux";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
-export default function AuthMiddleware(props) {
+export default function AuthMiddleware({ props, children }) {
   const auth = useSelector((state) => state.auth);
   const router = useRouter();
 
   useEffect(() => {
     if (auth.authenticatedUser) {
-      router.push("/");
+      router.push('/');
     }
   }, [auth.authenticatedUser]);
 
-  return <>{props.children}</>;
+  return (
+    <div>
+      {props}
+      {children}
+    </div>
+  );
 }

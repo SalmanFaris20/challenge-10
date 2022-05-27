@@ -1,4 +1,4 @@
-import { getDefaultMiddleware } from "@reduxjs/toolkit";
+import { getDefaultMiddleware } from '@reduxjs/toolkit';
 
 const customizeMiddleware = getDefaultMiddleware({
   serializableCheck: false,

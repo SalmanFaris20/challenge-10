@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import Navbar from "./Navbar";
-import { useDispatch } from "react-redux";
-import { updateScoreGame2 } from "../redux/games/gamesSlice";
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import Navbar from './Navbar';
+import { updateScoreGame2 } from '../redux/games/gamesSlice';
 
 export default function Random() {
   const [result, setResult] = useState(0);
@@ -14,7 +14,7 @@ export default function Random() {
     dispatch(
       updateScoreGame2({
         result: result,
-      })
+      }),
     );
     setResult(0);
     setRefresh(false);
@@ -39,17 +39,25 @@ export default function Random() {
         {refresh && (
           <div onClick={() => handleRefresh()}>
             <div className="justify-center w-96 flex">
-              <button className="btn btn-secondary">Play Again</button>
+              <button className="btn btn-secondary" type="button">
+                Play Again
+              </button>
             </div>
           </div>
         )}
         <div className="text-6xl font-bold  text-white">{result}</div>
         {active ? (
-          <button onClick={randomClick} className="btn btn-primary">
+          <button
+            onClick={randomClick}
+            className="btn btn-primary"
+            type="button"
+          >
             Play
           </button>
         ) : (
-          <button className="btn btn-primary cursor-not-allowed">Play</button>
+          <button className="btn btn-primary cursor-not-allowed" type="button">
+            Play
+          </button>
         )}
       </div>
     </>

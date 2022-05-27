@@ -1,23 +1,23 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import men from "../../images/male.png";
-import women from "../../images/female.png";
-import Image from "next/image";
-import Navbar from "../../components/Navbar";
-import { editAuth, updateCredentials } from "../../redux/auth/authSlice";
-import { XIcon } from "@heroicons/react/solid";
-import { ClockLoader } from "react-spinners";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { XIcon } from '@heroicons/react/solid';
+import Image from 'next/image';
+import { ClockLoader } from 'react-spinners';
+import { ToastContainer } from 'react-toastify';
+import men from '../../images/male.png';
+import women from '../../images/female.png';
+import Navbar from '../../components/Navbar';
+import { editAuth, updateCredentials } from '../../redux/auth/authSlice';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Profile() {
   const dispatch = useDispatch();
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [open, setOpen] = useState(false);
   const updateauth = useSelector((state) => state.auth);
   const authenticatedUser = useSelector(
-    (state) => state.auth.authenticatedUser
+    (state) => state.auth.authenticatedUser,
   );
 
   const handleSubmit = async (event) => {
@@ -33,7 +33,7 @@ export default function Profile() {
       updateCredentials({
         name: event.target.name,
         value: event.target.value,
-      })
+      }),
     );
   };
   return (
@@ -42,7 +42,7 @@ export default function Profile() {
       <ToastContainer />
       {updateauth.isFetchDataPlayerLoading ? (
         <div className="absolute top-1/2 right-1/2">
-          <ClockLoader color={"#FFFFFF"} size={50} />
+          <ClockLoader color="#FFFFFF" size={50} />
         </div>
       ) : (
         <div className="flex gap-10 justify-center items-center h-screen font-utama">
@@ -52,7 +52,7 @@ export default function Profile() {
                 <div className="avatar">
                   <div className="w-40 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2 ">
                     <Image
-                      src={authenticatedUser.gender === "Men" ? men : women}
+                      src={authenticatedUser.gender === 'Men' ? men : women}
                       height={500}
                       width={500}
                       alt="AvatarMen"
@@ -79,11 +79,7 @@ export default function Profile() {
 
           {open && (
             <>
-              <input
-                type="checkbox"
-                id="my-modal-6"
-                className="modal-toggle"
-              ></input>
+              <input type="checkbox" id="my-modal-6" className="modal-toggle" />
               <div className="modal modal-bottom sm:modal-middle">
                 <div className="modal-box">
                   <div className="flex justify-between">
@@ -93,7 +89,7 @@ export default function Profile() {
                   {authenticatedUser && (
                     <>
                       <div className="form-control w-full max-w-xs">
-                        <label className="label">
+                        <label className="label" htmlFor="username">
                           <span className="label-text">Username</span>
                         </label>
                         <input
@@ -106,7 +102,7 @@ export default function Profile() {
                         />
                       </div>
                       <div className="form-control w-full max-w-xs">
-                        <label className="label">
+                        <label className="label" htmlFor="email">
                           <span className="label-text">Email</span>
                         </label>
                         <input
@@ -119,7 +115,7 @@ export default function Profile() {
                         />
                       </div>
                       <div className="form-control w-full max-w-xs">
-                        <label className="label">
+                        <label className="label" htmlFor="gender">
                           <span className="label-text">Gender</span>
                         </label>
                         <select
@@ -129,8 +125,8 @@ export default function Profile() {
                           defaultValue={authenticatedUser.gender}
                         >
                           <option disabled>Pick one</option>
-                          <option value={"Men"}>Men</option>
-                          <option value={"Women"}>Women</option>
+                          <option value="Men">Men</option>
+                          <option value="Women">Women</option>
                         </select>
                       </div>
                     </>

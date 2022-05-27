@@ -1,23 +1,18 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { toast, ToastContainer } from 'react-toastify';
+import Link from 'next/link';
+import Image from 'next/image';
 import {
   loginAuth,
   updateAuthenticatedUser,
   updateCredentials,
-} from "../redux/auth/authSlice";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import Link from "next/link";
-import google from "../images/google.svg";
-import facebook from "../images/facebook.svg";
-import Image from "next/image";
-import {
-  FacebookAuthProvider,
-  GoogleAuthProvider,
-  signInWithPopup,
-} from "firebase/auth";
-import { auth, db } from "../config/firebase";
-import { useRouter } from "next/router";
-import { doc, setDoc, Timestamp } from "firebase/firestore";
+} from '../redux/auth/authSlice';
+import { auth } from '../config/firebase';
+import google from '../images/google.svg';
+import facebook from '../images/facebook.svg';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Cardlogin() {
   const dispatch = useDispatch();
@@ -28,7 +23,7 @@ export default function Cardlogin() {
       updateCredentials({
         name: event.target.name,
         value: event.target.value,
-      })
+      }),
     );
   };
 
@@ -36,21 +31,20 @@ export default function Cardlogin() {
     const provider = new GoogleAuthProvider();
     await signInWithPopup(auth, provider)
       .then((result) => {
-        const user = result.user;
+        const { user } = result;
         dispatch(
           updateAuthenticatedUser({
             email: user.email,
             username: user.displayName,
-            gender: "Men",
-          })
+            gender: 'Men',
+          }),
         );
-        console.log(user);
-        router.push("/");
+        router.push('/');
       })
       .catch((error) => {
         const errorMessage = error.message;
         toast.error(errorMessage, {
-          position: "top-right",
+          position: 'top-right',
           autoClose: 5000,
           hideProgressBar: false,
           closeOnClick: true,
@@ -61,25 +55,12 @@ export default function Cardlogin() {
       });
   };
 
-  const handleFacebook = () => {
-    const provider = new FacebookAuthProvider();
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        const user = result.user;
-        console.log("user facebook", user);
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-        console.log(errorMessage);
-      });
-  };
-
   const onSubmit = async (event) => {
     event.preventDefault();
     await dispatch(loginAuth(authed.form)).then((response) => {
       if (response.error) {
-        toast.error("error", {
-          position: "top-right",
+        toast.error('error', {
+          position: 'top-right',
           autoClose: 5000,
           hideProgressBar: false,
           closeOnClick: true,
@@ -100,7 +81,7 @@ export default function Cardlogin() {
             LOGIN
           </h2>
           <div className="form-control w-full max-w-xs">
-            <label className="label">
+            <label className="label" htmlFor="email">
               <span className="label-text text-ungu">Email</span>
             </label>
             <input
@@ -112,7 +93,7 @@ export default function Cardlogin() {
             />
           </div>
           <div className="form-control w-full max-w-xs">
-            <label className="label">
+            <label className="label" htmlFor="password">
               <span className="label-text text-ungu">Password</span>
             </label>
             <input
@@ -125,8 +106,8 @@ export default function Cardlogin() {
           </div>
           <div className="flex justify-start">
             <h5 className="text-ungu font-light">
-              not have an account?{" "}
-              <Link href={"/register"} passHref>
+              not have an account?{' '}
+              <Link href="/register" passHref>
                 <a className="text-login font-bold">Sign Up</a>
               </Link>
             </h5>
@@ -136,7 +117,7 @@ export default function Cardlogin() {
               <div onClick={handleGoogle}>
                 <Image src={google} width={30} height={30} />
               </div>
-              <div onClick={handleFacebook}>
+              <div>
                 <Image src={facebook} width={30} height={30} />
               </div>
             </div>

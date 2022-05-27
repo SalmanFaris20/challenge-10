@@ -1,8 +1,7 @@
-import React from "react";
-import Image from "next/image";
-import ImgRegister from "../../images/register.svg";
-import AuthMiddleware from "../../middlewares/authMiddleware";
-import CardRegister from "../../components/CardRegister";
+import Image from 'next/image';
+import ImgRegister from '../../images/register.svg';
+import AuthMiddleware from '../../middlewares/authMiddleware';
+import CardRegister from '../../components/CardRegister';
 
 export default function Register() {
   return (

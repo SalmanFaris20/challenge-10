@@ -1,9 +1,9 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
-} from "firebase/auth";
+} from 'firebase/auth';
 import {
   collection,
   doc,
@@ -11,51 +11,50 @@ import {
   setDoc,
   Timestamp,
   updateDoc,
-} from "firebase/firestore";
-import { auth, db } from "../../config/firebase";
+} from 'firebase/firestore';
+import { auth, db } from '../../config/firebase';
 
 export const fetchDataPlayer = createAsyncThunk(
-  "auth/fetchDataPlayer",
+  'auth/fetchDataPlayer',
   async () => {
     try {
-      const userCollectionRef = collection(db, "users");
+      const userCollectionRef = collection(db, 'users');
       const datas = await getDocs(userCollectionRef);
-      const result = datas.docs.map((doc) => ({ ...doc.data() }));
+      const result = datas.docs.map((document) => ({ ...document.data() }));
       return result;
     } catch (error) {
-      throw TypeError("Cant load data");
+      throw TypeError('Cant load data');
     }
-  }
+  },
 );
 
 export const editAuth = createAsyncThunk(
-  "auth/editAuth",
+  'auth/editAuth',
   async (credentials) => {
     try {
       const { email, username, gender } = credentials;
       const user = auth.currentUser;
-
-      const docRef = doc(db, "users", user.uid);
+      const docRef = doc(db, 'users', user.uid);
       await updateDoc(docRef, {
-        email,
-        username,
-        gender,
+        email: email,
+        username: username,
+        gender: gender,
       });
     } catch (error) {
-      throw TypeError("Unable Edit Form");
+      throw TypeError('Unable Edit Form');
     }
-  }
+  },
 );
 
 export const registerAuth = createAsyncThunk(
-  "auth/registerAuth",
+  'auth/registerAuth',
   async (credentials) => {
     try {
       const { email, password, username, gender } = credentials;
       await createUserWithEmailAndPassword(auth, email, password).then(
         (userCredential) => {
-          const user = userCredential.user;
-          setDoc(doc(db, "users", user.uid), {
+          const { user } = userCredential;
+          setDoc(doc(db, 'users', user.uid), {
             uid: user.uid,
             email: email,
             username: username,
@@ -70,17 +69,17 @@ export const registerAuth = createAsyncThunk(
             },
             createdAt: Timestamp.fromDate(new Date()),
           });
-        }
+        },
       );
     } catch (error) {
       const errorMessage = error.message;
       throw TypeError(errorMessage);
     }
-  }
+  },
 );
 
 export const loginAuth = createAsyncThunk(
-  "auth/loginAuth",
+  'auth/loginAuth',
   async (credentials) => {
     try {
       const { email, password } = credentials;
@@ -88,48 +87,36 @@ export const loginAuth = createAsyncThunk(
       const userCredential = await signInWithEmailAndPassword(
         auth,
         email,
-        password
+        password,
       );
 
       return {
         email: userCredential.user.email,
       };
     } catch (err) {
-      throw TypeError("Unable to login");
+      throw TypeError('Unable to login');
     }
-  }
+  },
 );
 
-export const googleAuth = createAsyncThunk("auth/googleAuth", async () => {
-  try {
-    await signInWithPopup(auth, provider).then((result) => {
-      const user = result.user;
-      console.log(user);
-    });
-  } catch (error) {
-    const errorMessage = error.message;
-    console.log(errorMessage);
-  }
-});
-
-export const logout = createAsyncThunk("auth/logout", async () => {
+export const logout = createAsyncThunk('auth/logout', async () => {
   try {
     await signOut(auth);
     return {};
   } catch (error) {
-    throw TypeError("Unable to logout");
+    throw TypeError('Unable to logout');
   }
 });
 
 export const authSlice = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState: {
     form: {
-      username: "",
-      email: "",
-      password: "",
-      confirmpassword: "",
-      gender: "",
+      username: '',
+      email: '',
+      password: '',
+      confirmpassword: '',
+      gender: '',
     },
     data: [],
     isLoginLoading: false,
@@ -137,7 +124,6 @@ export const authSlice = createSlice({
     isLogoutLoading: false,
     isRegisterLoading: false,
     isEditLoading: false,
-    authenticatedUser: null,
     isGoogleLoading: false,
   },
   reducers: {
@@ -206,15 +192,6 @@ export const authSlice = createSlice({
     });
     builder.addCase(fetchDataPlayer.rejected, (state) => {
       state.isFetchDataPlayerLoading = false;
-    });
-    builder.addCase(googleAuth.pending, (state) => {
-      state.isGoogleLoading = true;
-    });
-    builder.addCase(googleAuth.fulfilled, (state, action) => {
-      state.isGoogleLoading = false;
-    });
-    builder.addCase(googleAuth.rejected, (state) => {
-      state.isGoogleLoading = false;
     });
   },
 });

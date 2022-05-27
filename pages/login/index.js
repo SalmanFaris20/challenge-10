@@ -1,8 +1,7 @@
-import React from "react";
-import Image from "next/image";
-import LoginImage from "../../images/login.svg";
-import Cardlogin from "../../components/Cardlogin";
-import AuthMiddleware from "../../middlewares/authMiddleware";
+import Image from 'next/image';
+import LoginImage from '../../images/login.svg';
+import Cardlogin from '../../components/Cardlogin';
+import AuthMiddleware from '../../middlewares/authMiddleware';
 
 export default function Login() {
   return (

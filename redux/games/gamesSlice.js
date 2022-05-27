@@ -1,60 +1,60 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import {
   collection,
   doc,
   getDoc,
   getDocs,
   updateDoc,
-} from "firebase/firestore";
-import { auth, db } from "../../config/firebase";
+} from 'firebase/firestore';
+import { auth, db } from '../../config/firebase';
 
-export const fetchData = createAsyncThunk("games/fetchData", async () => {
+export const fetchData = createAsyncThunk('games/fetchData', async () => {
   try {
-    const userCollectionRef = collection(db, "games");
+    const userCollectionRef = collection(db, 'games');
     const datas = await getDocs(userCollectionRef);
-    const result = datas.docs.map((doc) => ({ ...doc.data() }));
+    const result = datas.docs.map((document) => ({ ...document.data() }));
     return result;
   } catch (error) {
-    throw TypeError("Cant load data");
+    throw TypeError('Cant load data');
   }
 });
 
 export const updateScore = createAsyncThunk(
-  "games/updateScore",
+  'games/updateScore',
   async (credentials) => {
     const { score } = credentials;
     try {
-      const userDoc = doc(db, "users", auth.currentUser.uid);
+      const userDoc = doc(db, 'users', auth.currentUser.uid);
       const docSnap = await getDoc(userDoc);
       const currentScore = docSnap.data().score.game1;
       const newScore = currentScore + score;
-      await updateDoc(userDoc, { "score.game1": newScore });
-      await updateDoc(userDoc, { "gameplayed.game1": true });
+      await updateDoc(userDoc, { 'score.game1': newScore });
+      await updateDoc(userDoc, { 'gameplayed.game1': true });
     } catch (error) {
-      throw TypeError("Cant push score");
+      throw TypeError('Cant push score');
     }
-  }
+  },
 );
 
 export const updateScoreGame2 = createAsyncThunk(
-  "games/updateScoreGame2",
+  'games/updateScoreGame2',
   async (credentials) => {
     const { result } = credentials;
     try {
-      const userDoc = doc(db, "users", auth.currentUser.uid);
+      const userDoc = doc(db, 'users', auth.currentUser.uid);
       const docSnap = await getDoc(userDoc);
       const currentScore = docSnap.data().score.game2;
       const newScore = currentScore + result;
-      await updateDoc(userDoc, { "score.game2": newScore });
-      await updateDoc(userDoc, { "gameplayed.game2": true });
+      await updateDoc(userDoc, { 'score.game2': newScore });
+      await updateDoc(userDoc, { 'gameplayed.game2': true });
     } catch (error) {
-      throw TypeError("Cant push score");
+      throw TypeError('Cant push score');
     }
-  }
+  },
 );
 
 export const gamesSlice = createSlice({
-  name: "games",
+  name: 'games',
   initialState: {
     isListGamesLoading: false,
 
