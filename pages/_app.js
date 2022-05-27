@@ -1,5 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable react/prop-types */
 import '../styles/globals.css';
 import { Provider, useDispatch } from 'react-redux';
 import { onAuthStateChanged } from 'firebase/auth';

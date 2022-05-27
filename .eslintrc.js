@@ -1,4 +1,3 @@
-/* eslint-disable linebreak-style */
 module.exports = {
   env: {
     browser: true,
@@ -15,12 +14,14 @@ module.exports = {
   plugins: ['react'],
   rules: {
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
+    'linebreak-style': 'off',
+    'arrow-body-style': 'off',
     'react/jsx-one-expression-per-line': 'off',
     'jsx-a11y/no-noninteractive-element-interactions': 'off',
     'jsx-a11y/no-static-element-interactions': 'off',
     'jsx-a11y/click-events-have-key-events': 'off',
+    'react/jsx-props-no-spreading': 'off',
     'no-unused-expressions': 'off',
-    'linebreak-style': ['error', 'windows'],
     'jsx-a11y/label-has-associated-control': [
       'error',
       {
@@ -37,7 +38,6 @@ module.exports = {
         },
       },
     ],
-    'arrow-body-style': ['error', 'as-needed'],
     'jsx-a11y/no-noninteractive-tabindex': 'off',
     'object-shorthand': ['error', 'never'],
     'jsx-a11y/anchor-is-valid': 'off',

@@ -1,4 +1,3 @@
-/* eslint-disable arrow-body-style */
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { collection, getDocs, orderBy, query } from 'firebase/firestore';
